@@ -1,0 +1,27 @@
+include(CMakeDependentOption)
+include(EnumOption)
+
+#--------------------------------------------------------------------
+# Define Enum Options
+#--------------------------------------------------------------------
+enum_option(PLATFORM "Desktop;Web;Android" "Platform to build for.")
+enum_option(GRAPHICS_API "Auto;OpenGL;Vulkan" "Force a Graphics API?")
+enum_option(OPENGL_VERSION "Auto;4.3;3.3;2.1;1.1;ES 2.0;ES 3.0" "Force a specific OpenGL Version?")
+
+#--------------------------------------------------------------------
+# Configuration Options
+#--------------------------------------------------------------------
+option(LUGL_BUILD_TESTBED "Build the LuGL testbed" ${LUGL_IS_MAIN})
+option(LUGL_VENDORED "Use vendored libraries" ON)
+option(LUGL_BUILD_UNIT_TESTS "Build the LuGL unit tests" ON)
+
+#--------------------------------------------------------------------
+# Build Options
+#--------------------------------------------------------------------
+option(BUILD_SHARED_LIBS "Build LuGL as a shared library" OFF)
+
+#--------------------------------------------------------------------
+# Graphics API Options
+#--------------------------------------------------------------------
+cmake_dependent_option(USE_OPENGL "Use OpenGL for rendering" ON "GRAPHICS_API STREQUAL 'OpenGL' OR GRAPHICS_API STREQUAL 'Auto'" OFF)
+cmake_dependent_option(USE_VULKAN "Use Vulkan for rendering" ON "GRAPHICS_API STREQUAL 'Vulkan' OR (GRAPHICS_API STREQUAL 'Auto' AND NOT USE_OPENGL)" OFF)

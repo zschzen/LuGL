@@ -14,7 +14,7 @@
 # the License.
 # ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-cmake_minimum_required(VERSION 3.30)
+cmake_minimum_required(VERSION 3.25)
 project(
   LuGL
   VERSION 0.0.1
@@ -40,7 +40,9 @@ include(BuildOptions)
 # Compiler Settings
 # --------------------------------------------------------------------
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 # --------------------------------------------------------------------
 # Visibility Settings
@@ -83,5 +85,5 @@ endif()
 include(GNUInstallDirs)
 
 # Install headers
-install(DIRECTORY "${CMAKE_SOURCE_DIR}/include/lumina"
+install(DIRECTORY "${CMAKE_SOURCE_DIR}/include/lugl"
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})

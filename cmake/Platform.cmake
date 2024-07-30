@@ -95,7 +95,8 @@ macro(define_platform_definitions target)
 
   # --------------------------------------------------------------------
   # Display Info
-  # --------------------------------------------------------------------
+  # -------------------------------------------------------------------
+  message(STATUS)
   message(STATUS "Compiler: ${CMAKE_CXX_COMPILER_ID}")
   message(STATUS "Platform: ${CMAKE_SYSTEM_NAME}")
   message(STATUS "Architecture: ${CMAKE_SYSTEM_PROCESSOR}")

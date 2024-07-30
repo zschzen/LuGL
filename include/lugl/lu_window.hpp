@@ -2,7 +2,6 @@
 #define LUGL_WINDOW_HPP
 
 #include <SDL2/SDL.h>
-#include <sys/_types/_u_int8_t.h>
 #include <string>
 
 enum WindowFlags

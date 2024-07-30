@@ -8,7 +8,7 @@ luWindow *         window;
 luOpenGLRenderer * renderer;
 
 void
-render_loop()
+main_loop()
 {
 #if defined( PLATFORM_WEB )
     if( window->shouldClose() )
@@ -39,7 +39,7 @@ main()
     // Main loop
     while( !window->shouldClose() )
         {
-            render_loop();
+            main_loop();
         }
 #endif
 

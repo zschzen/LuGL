@@ -30,6 +30,7 @@ endif()
 include(SDL_Import)
 include(GLEW_Import)
 include(GLM_Import)
+include(Import/spdlog)
 
 #--------------------------------------------------------------------
 # Library Setup

@@ -1,23 +1,26 @@
 {
   "name": "lugl",
   "version-string": "0.0.1",
-  "description": [
-    "An educational rendering engine"
-  ],
-  "supports": "windows, linux, macos, emscripten",
+  "description": "An educational rendering engine",
+  "supports": "windows, (linux, (macos, emscripten))",
   "dependencies": [
     {
-      "name": "sdl2",
-      "version>=": "2.30.5",
-      "platform": "!emscripten"
-    },
-    {
       "name": "glew",
-      "version>=": "2.2.0#3",
-      "platform": "!emscripten"
+      "platform": "!emscripten",
+      "version>=": "2.2.0#3"
     },
     {
-      "name":"glm",
+      "name": "sdl2",
+      "platform": "!emscripten",
+      "version>=": "2.30.5"
+    },
+    {
+      "name": "spdlog",
+      "platform": "!emscripten",
+      "version>=": "1.14.1"
+    },
+    {
+      "name": "glm",
       "version>=": "1.0.1#3"
     }
   ]

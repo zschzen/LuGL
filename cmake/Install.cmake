@@ -13,7 +13,7 @@ install(
 install(
   EXPORT luglConfig
   NAMESPACE lugl::
-  DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/Lumina")
+  DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/lugl")
 
 # --------------------------------------------------------------------
 # Package Configuration
@@ -27,4 +27,4 @@ write_basic_package_version_file(
 
 # Install package version file
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/luglConfigVersion.cmake"
-        DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/LuGL")
+        DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/lugl")

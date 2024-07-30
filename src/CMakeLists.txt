@@ -27,9 +27,9 @@ endif()
 #   include(VulkanConfigurations)
 # endif()
 
-include(SDL_Import)
-include(GLEW_Import)
-include(GLM_Import)
+include(Import/SDL)
+include(Import/GLEW)
+include(Import/GLM)
 include(Import/spdlog)
 
 #--------------------------------------------------------------------

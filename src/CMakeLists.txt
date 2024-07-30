@@ -8,6 +8,7 @@ set(LUGL_SOURCE_FILES
 )
 
 set(LUGL_HEADER_FILES
+  ../include/lugl/luapi.hpp
   ../include/lugl/lugl.hpp
   ../include/lugl/lu_renderer.hpp
   ../include/lugl/lu_window.hpp

@@ -1,7 +1,9 @@
 #ifndef LUGL_RENDERER_HPP
 #define LUGL_RENDERER_HPP
 
-class luRenderer
+#include "lugl/luapi.hpp"
+
+class LU_API luRenderer
 {
 public:
     virtual void init()        = 0;

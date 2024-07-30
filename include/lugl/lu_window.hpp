@@ -1,6 +1,8 @@
 #ifndef LUGL_WINDOW_HPP
 #define LUGL_WINDOW_HPP
 
+#include "lugl/luapi.hpp"
+
 #include <SDL2/SDL.h>
 #include <string>
 
@@ -11,7 +13,7 @@ enum WindowFlags
     WINDOW_MAXIMIZED = 1 << 1,
 };
 
-class luWindow
+class LU_API luWindow
 {
 public:
     luWindow( const std::string & title, int width, int height, int flags = 0 );

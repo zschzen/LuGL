@@ -28,11 +28,16 @@ endif()
 #    include(VulkanConfigurations)
 #endif()
 
-include(Platform)
 include(SDL_Import)
 include(GLEW_Import)
 
 add_library(lugl ${LUGL_SOURCE_FILES} ${LUGL_HEADER_FILES})
+
+include(Platform)
+define_platform_definitions(lugl)
+
+target_compile_definitions(lugl PUBLIC "${PLATFORM_CPP}")
+target_compile_definitions(lugl PUBLIC "${OpenGL_Version}")
 
 # Link libraries
 list(REMOVE_DUPLICATES LIBS)

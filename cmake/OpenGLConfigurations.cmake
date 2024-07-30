@@ -110,7 +110,7 @@ if(NOT ${OPENGL_VERSION} MATCHES "Auto")
 endif()
 
 # Set default graphics API if not already set
-if(NOT GRAPHICS)
+if(NOT OpenGL_Version)
   set(OpenGL_Version "GRAPHICS_API_OPENGL_33")
 endif()
 

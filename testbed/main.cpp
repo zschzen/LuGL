@@ -1,22 +1,50 @@
 #include "lugl/lugl.hpp"
 
+#if defined( PLATFORM_WEB )
+#include <emscripten/emscripten.h>
+#endif
+
+luWindow *         window;
+luOpenGLRenderer * renderer;
+
+void
+render_loop()
+{
+#if defined( PLATFORM_WEB )
+    if( window->shouldClose() )
+        {
+            emscripten_cancel_main_loop();
+            return;
+        }
+#endif
+
+    // Begin rendering
+    renderer->beginRender();
+    // End rendering
+    renderer->endRender();
+}
+
 int
 main()
 {
-    luWindow window( "lugl - basic window", 800, 450, WINDOW_DEFAULT );
+    window = new luWindow( "lugl - basic window", 800, 450, WINDOW_DEFAULT );
 
     // Initialize the renderer
-    luOpenGLRenderer renderer;
+    renderer = new luOpenGLRenderer();
+    renderer->init();
 
-    renderer.init();
+#if defined( PLATFORM_WEB )
+    emscripten_set_main_loop( main_loop, 0, 1 );
+#else
     // Main loop
-    while( !window.shouldClose() )
+    while( !window->shouldClose() )
         {
-            // Begin rendering
-            renderer.beginRender();
-            // End rendering
-            renderer.endRender();
+            render_loop();
         }
+#endif
+
+    delete window;
+    delete renderer;
 
     return 0;
 }

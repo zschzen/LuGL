@@ -28,14 +28,11 @@ endif()
 #    include(VulkanConfigurations)
 #endif()
 
+include(Platform)
 include(SDL_Import)
 include(GLEW_Import)
-include(Platform)
-
 
 add_library(lugl ${LUGL_SOURCE_FILES} ${LUGL_HEADER_FILES})
-
-#define_platform_definitions(lumina)
 
 # Link libraries
 list(REMOVE_DUPLICATES LIBS)
@@ -76,8 +73,15 @@ endif()
 #--------------------------------------------------------------------
 # Source Groups
 #--------------------------------------------------------------------
-source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" PREFIX "src" FILES ${LUGL_SOURCE_FILES})
-source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}/../include" PREFIX "include" FILES ${LUGL_HEADER_FILES})
+source_group(
+  TREE "${CMAKE_CURRENT_SOURCE_DIR}"
+  PREFIX "src"
+  FILES ${LUGL_SOURCE_FILES})
+source_group(
+  TREE "${CMAKE_CURRENT_SOURCE_DIR}/../include"
+  PREFIX "include"
+  FILES ${LUGL_HEADER_FILES})
+
 
 #--------------------------------------------------------------------
 # Install Configuration
@@ -90,11 +94,11 @@ include(Install)
 message(STATUS "Target System: ${CMAKE_SYSTEM_NAME}")
 
 # Print the flags for the user
-if (DEFINED CMAKE_BUILD_TYPE)
+if(DEFINED CMAKE_BUILD_TYPE)
     message(STATUS "Generated build type: ${CMAKE_BUILD_TYPE}")
-else ()
+else()
     message(STATUS "Generated config types: ${CMAKE_CONFIGURATION_TYPES}")
-endif ()
+endif()
 
 message(STATUS "Compiling with the flags:")
 message(STATUS "\tPLATFORM=" ${PLATFORM_CPP})

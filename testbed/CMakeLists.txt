@@ -1,6 +1,6 @@
-set(TESTBED_SOURCE_FILES ./main.cpp ./Application.cpp)
+set(TESTBED_SOURCE_FILES ./main.cpp)
 
-set(TESTBED_HEADER_FILES ./Application.hpp)
+set(TESTBED_HEADER_FILES)
 
 add_executable(testbed)
 target_sources(testbed PRIVATE ${TESTBED_SOURCE_FILES} ${TESTBED_HEADER_FILES})

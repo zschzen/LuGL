@@ -14,23 +14,26 @@ set(LUGL_HEADER_FILES
   ../include/lugl/platform/opengl/lu_opengl_renderer.hpp
 )
 
-list(APPEND LUGL_INCLUDE_DIR
-)
+list(APPEND LUGL_INCLUDE_DIR)
 
 #--------------------------------------------------------------------
 # Include External Configuration Files
 #--------------------------------------------------------------------
 if(GRAPHICS_API STREQUAL "Auto" OR GRAPHICS_API STREQUAL "OpenGL")
-    include(OpenGLConfigurations)
+  include(OpenGLConfigurations)
 endif()
 
-#if(GRAPHICS_API STREQUAL "Auto" OR GRAPHICS_API STREQUAL "Vulkan")
-#    include(VulkanConfigurations)
-#endif()
+# if(GRAPHICS_API STREQUAL "Auto" OR GRAPHICS_API STREQUAL "Vulkan")
+#   include(VulkanConfigurations)
+# endif()
 
 include(SDL_Import)
 include(GLEW_Import)
+include(GLM_Import)
 
+#--------------------------------------------------------------------
+# Library Setup
+#--------------------------------------------------------------------
 add_library(lugl ${LUGL_SOURCE_FILES} ${LUGL_HEADER_FILES})
 
 include(Platform)
@@ -48,31 +51,31 @@ target_link_libraries(lugl PUBLIC ${LIBS})
 #--------------------------------------------------------------------
 list(REMOVE_DUPLICATES LUGL_INCLUDE_DIR)
 target_include_directories(lugl
-        PUBLIC
-          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
-          $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
-        PRIVATE
-          ${CMAKE_CURRENT_SOURCE_DIR}/src
-          LUGL_INCLUDE_DIR
+  PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+  PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
+    LUGL_INCLUDE_DIR
 )
 
 #--------------------------------------------------------------------
 # Target Properties
 #--------------------------------------------------------------------
 set_target_properties(lugl PROPERTIES
-        CXX_STANDARD 20
-        CXX_STANDARD_REQUIRED YES
-        CXX_EXTENSIONS NO
-        VERSION ${PROJECT_VERSION}
-        SOVERSION ${PROJECT_VERSION_MAJOR}
+  CXX_STANDARD 20
+  CXX_STANDARD_REQUIRED YES
+  CXX_EXTENSIONS NO
+  VERSION ${PROJECT_VERSION}
+  SOVERSION ${PROJECT_VERSION_MAJOR}
 )
 
 #--------------------------------------------------------------------
 # Shared Library Configuration
 #--------------------------------------------------------------------
 if(BUILD_SHARED_LIBS)
-    message(STATUS "Building shared library")
-    target_compile_definitions(lugl PUBLIC LU_SHARED)
+  message(STATUS "Building shared library")
+  target_compile_definitions(lugl PUBLIC LU_SHARED)
 endif()
 
 #--------------------------------------------------------------------
@@ -81,12 +84,13 @@ endif()
 source_group(
   TREE "${CMAKE_CURRENT_SOURCE_DIR}"
   PREFIX "src"
-  FILES ${LUGL_SOURCE_FILES})
+  FILES ${LUGL_SOURCE_FILES}
+)
 source_group(
   TREE "${CMAKE_CURRENT_SOURCE_DIR}/../include"
   PREFIX "include"
-  FILES ${LUGL_HEADER_FILES})
-
+  FILES ${LUGL_HEADER_FILES}
+)
 
 #--------------------------------------------------------------------
 # Install Configuration
@@ -100,14 +104,14 @@ message(STATUS "Target System: ${CMAKE_SYSTEM_NAME}")
 
 # Print the flags for the user
 if(DEFINED CMAKE_BUILD_TYPE)
-    message(STATUS "Generated build type: ${CMAKE_BUILD_TYPE}")
+  message(STATUS "Generated build type: ${CMAKE_BUILD_TYPE}")
 else()
-    message(STATUS "Generated config types: ${CMAKE_CONFIGURATION_TYPES}")
+  message(STATUS "Generated config types: ${CMAKE_CONFIGURATION_TYPES}")
 endif()
 
 message(STATUS "Compiling with the flags:")
-message(STATUS "\tPLATFORM=" ${PLATFORM_CPP})
-message(STATUS "\tGRAPHICS_API=" ${GRAPHICS_API})
-message(STATUS "\tOpenGL_Version=" ${OpenGL_Version})
-#message(STATUS "\tVulkan_VERSION=" ${Vulkan_VERSION})
+message(STATUS "\tPLATFORM=${PLATFORM_CPP}")
+message(STATUS "\tGRAPHICS_API=${GRAPHICS_API}")
+message(STATUS "\tOpenGL_Version=${OpenGL_Version}")
+# message(STATUS "\tVulkan_VERSION=${Vulkan_VERSION}")
 

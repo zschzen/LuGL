@@ -44,6 +44,12 @@ define_platform_definitions(lugl)
 target_compile_definitions(lugl PUBLIC "${PLATFORM_CPP}")
 target_compile_definitions(lugl PUBLIC "${OpenGL_Version}")
 
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+  target_compile_definitions(lugl PUBLIC LU_DEBUG)
+elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
+  target_compile_definitions(lugl PUBLIC LU_RELEASE)
+endif()
+
 # Link libraries
 list(REMOVE_DUPLICATES LIBS)
 target_link_libraries(lugl PUBLIC ${LIBS})
@@ -116,4 +122,8 @@ message(STATUS "\tPLATFORM=${PLATFORM_CPP}")
 message(STATUS "\tGRAPHICS_API=${GRAPHICS_API}")
 message(STATUS "\tOpenGL_Version=${OpenGL_Version}")
 # message(STATUS "\tVulkan_VERSION=${Vulkan_VERSION}")
-
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+  message(STATUS "\tDefinition=LU_DEBUG")
+elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
+  message(STATUS "\tDefinition=LU_RELEASE")
+endif()

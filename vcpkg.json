@@ -1,6 +1,6 @@
 {
   "name": "lugl",
-  "version-string": "0.0.1",
+  "version": "0.0.1",
   "description": "An educational rendering engine",
   "supports": "windows, (linux, (macos, emscripten))",
   "dependencies": [
@@ -12,7 +12,12 @@
     {
       "name": "sdl2",
       "platform": "!emscripten",
-      "version>=": "2.30.5"
+      "version>=": "2.30.5#1",
+      "features": ["vulkan"]
+    },
+    {
+      "name": "fmt",
+      "version>=": "10.2.1"
     },
     {
       "name": "spdlog",

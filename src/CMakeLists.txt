@@ -4,7 +4,6 @@
 set(LUGL_SOURCE_FILES
   ./lu_window.cpp
   ./lu_renderer.cpp
-  ./lu_log.cpp
   ./lu_opengl_renderer.cpp
 )
 
@@ -22,7 +21,6 @@ set(LUGL_HEADER_FILES
 set(LUGL_PRIVATE_HEADER_FILES
   ./base.hpp
   ./graphics-wrapper.hpp
-  ./lu_log.hpp
 )
 
 list(APPEND LUGL_INCLUDE_DIR)

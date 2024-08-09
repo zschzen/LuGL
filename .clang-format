@@ -8,6 +8,10 @@ AlignConsecutiveAssignments:
   AcrossComments: false
 AlignConsecutiveBitFields: true
 AlignConsecutiveDeclarations: true
+AlignConsecutiveMacros:
+  Enabled: true
+  AcrossComments: true
+  AlignFunctionPointers: true
 AlignEscapedNewlines: Right
 AlignOperands: true
 AlignTrailingComments: true
@@ -82,7 +86,7 @@ IndentCaseBlocks: true
 IndentCaseLabels: false
 IndentExternBlock: AfterExternBlock
 IndentGotoLabels: true
-IndentPPDirectives: None
+IndentPPDirectives: AfterHash
 IndentWidth: 4
 IndentWrappedFunctionNames: false
 JavaScriptQuotes: Leave

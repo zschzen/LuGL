@@ -4,15 +4,25 @@
 set(LUGL_SOURCE_FILES
   ./lu_window.cpp
   ./lu_renderer.cpp
+  ./lu_log.cpp
   ./lu_opengl_renderer.cpp
 )
 
 set(LUGL_HEADER_FILES
+  ../include/lugl/platform/opengl/lu_opengl_renderer.hpp
+  ../include/lugl/lu_math.hpp
+  ../include/lugl/lu_renderer.hpp
+  ../include/lugl/lu_settings.hpp
+  ../include/lugl/lu_types.hpp
+  ../include/lugl/lu_window.hpp
   ../include/lugl/luapi.hpp
   ../include/lugl/lugl.hpp
-  ../include/lugl/lu_renderer.hpp
-  ../include/lugl/lu_window.hpp
-  ../include/lugl/platform/opengl/lu_opengl_renderer.hpp
+)
+
+set(LUGL_PRIVATE_HEADER_FILES
+  ./base.hpp
+  ./graphics-wrapper.hpp
+  ./lu_log.hpp
 )
 
 list(APPEND LUGL_INCLUDE_DIR)
@@ -31,12 +41,14 @@ endif()
 include(Import/SDL)
 include(Import/GLEW)
 include(Import/GLM)
+include(Import/fmt)
 include(Import/spdlog)
 
 #--------------------------------------------------------------------
 # Library Setup
 #--------------------------------------------------------------------
-add_library(lugl ${LUGL_SOURCE_FILES} ${LUGL_HEADER_FILES})
+add_library(lugl ${LUGL_SOURCE_FILES} ${LUGL_HEADER_FILES}
+                 ${LUGL_PRIVATE_HEADER_FILES})
 
 include(Platform)
 define_platform_definitions(lugl)
@@ -92,7 +104,7 @@ endif()
 source_group(
   TREE "${CMAKE_CURRENT_SOURCE_DIR}"
   PREFIX "src"
-  FILES ${LUGL_SOURCE_FILES}
+  FILES ${LUGL_SOURCE_FILES} ${LUGL_PRIVATE_HEADER_FILES}
 )
 source_group(
   TREE "${CMAKE_CURRENT_SOURCE_DIR}/../include"

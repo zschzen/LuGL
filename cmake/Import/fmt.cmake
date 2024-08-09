@@ -1,7 +1,5 @@
 # --------------------------------------------------------------------
-# spdlog
+# fmt
 # --------------------------------------------------------------------
-if(NOT EMSCRIPTEN)
-  find_package(spdlog CONFIG REQUIRED)
-  list(APPEND LIBS spdlog::spdlog_header_only)
-endif()
+find_package(fmt CONFIG REQUIRED)
+list(APPEND LIBS fmt::fmt)

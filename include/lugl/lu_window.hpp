@@ -25,9 +25,7 @@ private:
     SDL_Window *  window;
     SDL_GLContext glContext;
 
-    u_int8_t shouldCloseFlag : 1 { false };
-
-    void pollEvents();
+    bool pollEvents();
 };
 
 #endif /** LUGL_WINDOW_HPP */

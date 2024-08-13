@@ -31,22 +31,33 @@ luWindow::~luWindow()
     SDL_Quit();
 }
 
-void
+bool
 luWindow::pollEvents()
 {
     SDL_Event event;
     while( SDL_PollEvent( &event ) )
         {
-            if( event.type == SDL_QUIT )
+            switch( event.type )
                 {
-                    shouldCloseFlag = true;
+                case SDL_QUIT:
+                    return true;
+
+                case SDL_KEYDOWN:
+                    if( event.key.keysym.sym == SDLK_ESCAPE )
+                        {
+                            return true;
+                        }
+                    break;
+                default:
+                    break;
                 }
         }
+
+    return false;
 }
 
 bool
 luWindow::shouldClose()
 {
-    pollEvents();
-    return shouldCloseFlag;
+    return pollEvents();
 }

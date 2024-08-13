@@ -51,9 +51,9 @@ if(${PLATFORM} MATCHES "Desktop")
 
 elseif(${PLATFORM} MATCHES "Web")
   set(PLATFORM_CPP "PLATFORM_WEB")
-  set(OpenGL_Version "GRAPHICS_API_OPENGL_ES2")
-  set(CMAKE_C_FLAGS
-      "${CMAKE_C_FLAGS} --use-port=sdl2 -s ASSERTIONS=1 --profiling")
+  if(NOT OpenGL_Version)
+    set(OpenGL_Version "GRAPHICS_API_OPENGL_ES2")
+  endif()
   set(CMAKE_STATIC_LIBRARY_SUFFIX ".a")
 
 elseif(${PLATFORM} MATCHES "Android")
@@ -113,4 +113,3 @@ endif()
 if(NOT OpenGL_Version)
   set(OpenGL_Version "GRAPHICS_API_OPENGL_33")
 endif()
-

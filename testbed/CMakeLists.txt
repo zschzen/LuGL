@@ -20,6 +20,7 @@ if(EMSCRIPTEN)
     PROPERTIES
       LINK_FLAGS
       "--emrun
+      --use-port=sdl2
       WASM=1 -s
       ASYNCIFY -s
       GL_ENABLE_GET_PROC_ADDRESS=1 -s

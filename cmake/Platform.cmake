@@ -28,6 +28,9 @@ macro(define_platform_definitions target)
   elseif(ANDROID)
     target_compile_definitions(${target} PRIVATE LUGL_PLATFORM_ANDROID=1
                                                  LUGL_PLATFORM_NAME="android")
+  elseif(EMSCRIPTEN)
+    target_compile_definitions(${target} PRIVATE LUGL_PLATFORM_EMSCRIPTEN=1
+                                                 LUGL_PLATFORM_NAME="html5")
   elseif(UNIX AND NOT APPLE)
     target_compile_definitions(${target} PRIVATE LUGL_PLATFORM_LINUX=1
                                                  LUGL_PLATFORM_NAME="linux")
@@ -39,9 +42,6 @@ macro(define_platform_definitions target)
       target_compile_definitions(${target} PRIVATE LUGL_PLATFORM_OSX=1
                                                    LUGL_PLATFORM_NAME="osx")
     endif()
-  elseif(EMSCRIPTEN)
-    target_compile_definitions(${target} PRIVATE LUGL_PLATFORM_EMSCRIPTEN=1
-                                                 LUGL_PLATFORM_NAME="html5")
   else()
     message(FATAL_ERROR "Unsupported platform")
   endif()

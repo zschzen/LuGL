@@ -48,8 +48,8 @@ include(Import/spdlog)
 add_library(lugl ${LUGL_SOURCE_FILES} ${LUGL_HEADER_FILES}
                  ${LUGL_PRIVATE_HEADER_FILES})
 
-include(Platform)
-define_platform_definitions(lugl)
+#include(Platform)
+#define_platform_definitions(lugl)
 
 target_compile_definitions(lugl PUBLIC "${PLATFORM_CPP}")
 target_compile_definitions(lugl PUBLIC "${OpenGL_Version}")

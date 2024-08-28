@@ -2,30 +2,86 @@
   "version": 3,
   "cmakeMinimumRequired": {
     "major": 3,
-    "minor": 20,
+    "minor": 25,
     "patch": 0
   },
   "configurePresets": [
     {
-      "name": "debug",
+      "name": "base",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "installDir": "${sourceDir}/install/${presetName}",
       "generator": "Ninja",
-      "binaryDir": "${sourceDir}/Build/debug",
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug",
-        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+        "CMAKE_TOOLCHAIN_FILE": {
+          "type": "FILEPATH",
+          "value": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+        },
+        "VCPKG_FEATURE_FLAGS": "versions"
       }
     },
     {
-      "name": "emscripten",
-      "generator": "Ninja",
-      "binaryDir": "${sourceDir}/Build/emscripten",
+      "name": "desktop-dev",
+      "inherits": "base",
+      "description": "Configure with development settings for desktop",
       "cacheVariables": {
-        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "desktop-rel",
+      "inherits": "base",
+      "description": "Configure with minimized size release settings for desktop",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "MinSizeRel"
+      }
+    },
+    {
+      "name": "web-dev",
+      "inherits": "base",
+      "description": "Configure with development settings for web",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": {
+          "type": "FILEPATH",
+          "value": "$env{EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake"
+        },
+        "VCPKG_TARGET_TRIPLET": "wasm32-emscripten",
+        "PLATFORM": "Web"
+      }
+    },
+    {
+      "name": "web-rel",
+      "inherits": "base",
+      "description": "Configure with minimized size release settings for web",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "MinSizeRel",
         "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "$env{EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake",
         "VCPKG_TARGET_TRIPLET": "wasm32-emscripten",
         "PLATFORM": "Web"
       }
     }
+  ],
+  "buildPresets": [
+    {
+      "name": "desktop-dev",
+      "configurePreset": "desktop-dev",
+      "description": "Build using the desktop-dev configure preset"
+    },
+    {
+      "name": "desktop-rel",
+      "configurePreset": "desktop-rel",
+      "description": "Build using the desktop-rel configure preset"
+    },
+    {
+      "name": "web-dev",
+      "configurePreset": "web-dev",
+      "description": "Build using the web-dev configure preset"
+    },
+    {
+      "name": "web-rel",
+      "configurePreset": "web-rel",
+      "description": "Build using the web-rel configure preset"
+    }
   ]
 }
-

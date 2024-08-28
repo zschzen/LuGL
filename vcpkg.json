@@ -12,7 +12,7 @@
     {
       "name": "sdl2",
       "platform": "!emscripten",
-      "version>=": "2.30.5"
+      "version>=": "2.30.6"
     },
     {
       "name": "spdlog",

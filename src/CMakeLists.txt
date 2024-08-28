@@ -36,11 +36,14 @@ endif()
 #   include(VulkanConfigurations)
 # endif()
 
-include(Import/SDL)
-include(Import/GLEW)
 include(Import/GLM)
 include(Import/fmt)
-include(Import/spdlog)
+
+if(NOT EMSCRIPTEN)
+  include(Import/GLEW)
+  include(Import/SDL)
+  include(Import/spdlog)
+endif()
 
 #--------------------------------------------------------------------
 # Library Setup
